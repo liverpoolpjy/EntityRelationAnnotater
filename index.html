@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Viper</title>
+        <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <!--<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">-->
+
+        <link rel="stylesheet" href="/css/main.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="/js/main.js"></script>
+    </head>
+    <body>
+    <nav class="navbar navbar-default">
+        <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#"><strong>Entity & Relation Annotation</strong></a>
+            </div>
+        </div><!-- /.container-fluid -->
+    </nav>
+        <!--<div id="dashboard" class="pure-u-1-6">-->
+            <!--<h1>Viper</h1>-->
+            <!--<hr>-->
+
+            <!--<form class="pure-form" action="/dataset/save" method="post">-->
+                <!--<div>-->
+                    <!--<label><strong>INTERFACE</strong></label>-->
+                    <!--<select name="nlp-option">-->
+                        <!--<option value="ner" selected>Named Entities</option>-->
+                        <!--&lt;!&ndash; <option>Text Classification</option> &ndash;&gt;-->
+                    <!--</select>-->
+                <!--</div>-->
+
+                <!--<div>-->
+                    <!--<label><strong>DATASET</strong></label>-->
+                    <!--<input name="dataset" type="file">-->
+                <!--</div>-->
+
+                <!--<button class="button-success pure-button">Update</button>-->
+            <!--</form>-->
+            <!--<hr>-->
+
+            <!--<h4><a href="/dataset" download>Download Classified Dataset</a></h4>-->
+        <!--</div>-->
+
+        <!--<div id="workspace" class="pure-u-5-6">-->
+
+            <!--<br>-->
+
+            <!--<h1 class="waiting-for-sentence" style="display: none;">-->
+                <!--You must select a Dataset on the dashboard!-->
+            <!--</h1>-->
+
+            <!--<div class="pure-g not-waiting-for-sentence">-->
+                <!--<div class="pure-u-1-5"></div>-->
+
+                <!--<div id="texto" class="pure-u-3-5"></div>-->
+
+                <!--<div class="pure-u-1-5"></div>-->
+            <!--</div>-->
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div id="texto" class="col-md-8"></div>
+                <div class="col-md-2"></div>
+            </div>
+
+
+
+            <br>
+            <button id="add_relation" class="button-primary button-xlarge pure-button not-waiting-for-sentence">
+                Add Relations
+            </button>
+            <button id="ok" class="button-success button-xlarge pure-button not-waiting-for-sentence">
+                Next
+            </button>
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-8">
+
+                <table class="table table-bordered">
+                    <thead>
+                    <tr class="text-center">
+                        <th>Relation Type</th>
+                        <th>Entity 1</th>
+                        <th>Entity 2</th>
+                    </tr>
+                    </thead>
+                    <tbody id="relations" >
+
+                    </tbody>
+
+                </table>
+              </div>
+            <div class="col-md-2"></div>
+            </div>
+
+
+
+
+        </div>
+
+        <!-- begin #modal-container -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Add Relation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <label>Relation types</label>
+                            <select id="re_type" name="nlp-option">
+                                <option value="HasObservableOf" selected>HasObservableOf</option>
+                                <option value="MakeUseOf" selected>MakeUseOf</option>
+                                <option value="TakeAttackOf" selected>TakeAttackOf</option>
+                                <option value="HasVulnerabilityOf" selected>HasVulnerabilityOf</option>
+                            </select>
+                         </div>
+                         <div>
+                            <label for="re_entities">Entities</label>
+                            <div id="re_entities">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" id="sub-re" class="btn btn-primary">Submit</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+    </body>
+
+    <!-- begin #modal-container -->
+		<div class="modal fade" id="EntityModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Add Relation</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <label for="en_type">Entity Type</label>
+                            <select class="form-control" id="en_type">
+                            <option value="IP">IP</option>
+                            <option value="EMAIL">EMAIL</option>
+                            <option value="HASH">HASH</option>
+                            <option value="URL">URL</option>
+                            <option value="VUL">VUL</option>
+                            <option value="MAL">MAL</option>
+                            <option value="SFT">SFT</option>
+                            <option value="MET">MET</option>
+                            <option value="PER">PER</option>
+                            <option value="ORG">ORG</option>
+                            <option value="LOC">LOC</option>
+                            </select>
+                         </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+    </body>
+</html>
